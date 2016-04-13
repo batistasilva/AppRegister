@@ -1,2 +1,1 @@
-# AppRegister
-Android Application Register
+# AndroidApp
