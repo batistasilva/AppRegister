@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="commons-codec-1.10-tests">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../system/AndroidStudioProjects/LoginRegister/app/libs/commons-codec-1.10-tests.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

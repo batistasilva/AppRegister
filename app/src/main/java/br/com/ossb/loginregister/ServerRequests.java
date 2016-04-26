@@ -22,7 +22,7 @@ public class ServerRequests {
     private static final String LOG_TAG_DEBUG = "SERVER REQUEST";
     private static final String LOG_TAG_RESULT = "SERVER REQUEST";
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
-    public static final String SERVER_ADDRESS = "http://192.168.0.102";
+    public static final String SERVER_ADDRESS = "http://192.168.0.11";
 
     public ServerRequests(Context context){
         progressDialog = new ProgressDialog(context);
