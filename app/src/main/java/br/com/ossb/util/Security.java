@@ -5,7 +5,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 public class Security {
-    public static String encrypt(String input, String key){
+    public String encrypt(String input, String key){
         byte[] crypted = null;
         try{
             SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
@@ -18,7 +18,7 @@ public class Security {
         return new String(Base64.encodeBase64(crypted));
     }
 
-    public static String decrypt(String input, String key){
+    public String decrypt(String input, String key){
         byte[] output = null;
         try{
             SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");

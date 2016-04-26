@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  */
 public class UserLocalStore {
     public static final String SP_NAME = "userDetails";
-    SharedPreferences userLocalDatabase;
+    SharedPreferences userLocalDatabase;//For data local save in android file system
 
     public UserLocalStore(Context context) {
         this.userLocalDatabase = context.getSharedPreferences(SP_NAME, 0);

@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import br.com.ossb.util.Security;
+
 
 public class Register extends ActionBarActivity implements View.OnClickListener{
-
+    Security sec;
     Button btRegister;
     EditText etName, etUsername, etAge, etPassword;
+    public static final String STRING_KEY = "1234567891234567";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,12 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btRegister:
-                String name = etName.getText().toString();
+                sec = new Security();
+                //
+                String name = sec.encrypt(etName.getText().toString(), STRING_KEY);
                 int    age  = Integer.parseInt(etAge.getText().toString());
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
+                String username = sec.encrypt(etUsername.getText().toString(), STRING_KEY);
+                String password = sec.encrypt(etPassword.getText().toString(), STRING_KEY);
 
                 User user = new User(name, age, username, password);
 
