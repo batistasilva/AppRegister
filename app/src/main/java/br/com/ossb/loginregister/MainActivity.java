@@ -47,10 +47,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void displayUserDatails(){
         User user = userLocalStore.getLoggedInUser();
       // if(!user.equals(null)) {
-           if(!user.name.isEmpty()) {
-               etName.setText(user.name);
-               etUsername.setText(user.username);
-               etAge.setText(Integer.toString(user.age));
+           if(!user.getName().isEmpty()) {
+               etName.setText(user.getName());
+               etUsername.setText(user.getUsername());
+               etAge.setText(Integer.toString(user.getAge()));
            }
        //}else{
        //    clearUserLocalStore();

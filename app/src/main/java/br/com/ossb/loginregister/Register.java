@@ -40,11 +40,12 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
                 sec = new Security();
                 //
                 String name = sec.encrypt(etName.getText().toString(), STRING_KEY);
+                //String email = sec.encrypt(etName.getText().toString(), STRING_KEY);
                 int    age  = Integer.parseInt(etAge.getText().toString());
                 String username = sec.encrypt(etUsername.getText().toString(), STRING_KEY);
                 String password = sec.encrypt(etPassword.getText().toString(), STRING_KEY);
 
-                User user = new User(name, age, username, password);
+                User user = new User(name, "", age, username, password);
 
                 registerUser(user);
 

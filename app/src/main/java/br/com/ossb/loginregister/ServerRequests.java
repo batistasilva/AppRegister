@@ -14,6 +14,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import br.com.ossb.util.Security;
+
 /**
  * Created by batista on 29/07/15.
  */
@@ -23,6 +25,8 @@ public class ServerRequests {
     private static final String LOG_TAG_RESULT = "SERVER REQUEST";
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://192.168.0.11";
+    public static final String STRING_KEY = "1234567891234567";
+    Security sec;
 
     public ServerRequests(Context context){
         progressDialog = new ProgressDialog(context);
@@ -56,16 +60,16 @@ public class ServerRequests {
                 String link = SERVER_ADDRESS + "/AndroidPhp/Register.php";
                 //
                 String data = URLEncoder.encode("name", "UTF-8")
-                        + "=" + URLEncoder.encode(user.name, "UTF-8");
+                        + "=" + URLEncoder.encode(user.getName(), "UTF-8");
 
                 data += "&" + URLEncoder.encode("age", "UTF-8")
                         + "=" + user.age +"";
 
                 data += "&" + URLEncoder.encode("username", "UTF-8")
-                        + "=" + URLEncoder.encode(user.username, "UTF-8");
+                        + "=" + URLEncoder.encode(user.getUsername(), "UTF-8");
                 //
                 data += "&" + URLEncoder.encode("password", "UTF-8")
-                        + "=" + URLEncoder.encode(user.password, "UTF-8");
+                        + "=" + URLEncoder.encode(user.getPassword(), "UTF-8");
 
                 //Setting link to url to it will be load
                 URL url = new URL(link);
@@ -96,7 +100,7 @@ public class ServerRequests {
 
                 Log.i(LOG_TAG_RESULT, result);
 
-              //  JSONObject jsonObject = new JSONObject(result);
+              // JSONObject jsonObject = new JSONObject(result);
 
 
             } catch (Exception e) {
@@ -132,10 +136,10 @@ public class ServerRequests {
                 String link = SERVER_ADDRESS + "/AndroidPhp/FetchUserData.php";
                 //
                 String data = URLEncoder.encode("username", "UTF-8")
-                        + "=" + URLEncoder.encode(user.username, "UTF-8");
+                        + "=" + URLEncoder.encode(user.getUsername(), "UTF-8");
                 //
                 data += "&" + URLEncoder.encode("password", "UTF-8")
-                        + "=" + URLEncoder.encode(user.password, "UTF-8");
+                        + "=" + URLEncoder.encode(user.getPassword(), "UTF-8");
 
                 //Setting link to url to it will be load
                 URL url = new URL(link);
@@ -161,17 +165,32 @@ public class ServerRequests {
 
                 String result = sb.toString();
 
-                Log.i(LOG_TAG_RESULT, result);
+                Log.i(LOG_TAG_RESULT,  "Got this Result.....: "+result);
 
                 JSONObject jsonObject = new JSONObject(result);
+
 
                 if(jsonObject.length() == 0){
                     returnedUser = null;
                 }else{
-                    String name = jsonObject.getString("name");
-                    int    age  = jsonObject.getInt("age");
+                    sec = new Security();
+                    //
+                    String vname     = jsonObject.getString("name");
+                    String vemail    = jsonObject.getString("email");
+                    int    vage      = jsonObject.getInt("age");
+                    String vusername = jsonObject.getString("username");
+                    String vpassword = jsonObject.getString("password");
 
-                    returnedUser = new User(name, age, user.username, user.password);
+                    //Log.i(LOG_TAG_RESULT, "Name....:" + vname + "Username....: " + vusername + "Password....: " + vpassword);
+                    //
+                    String name =vname;
+                    String email = vemail;
+                    int    age  = vage;
+                    String username = vusername;
+                    String password = vpassword;
+
+                    //
+                    returnedUser = new User(name, email, age, username, password);
                 }
 
             } catch (Exception e) {

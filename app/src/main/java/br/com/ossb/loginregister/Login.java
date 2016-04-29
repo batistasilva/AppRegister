@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import br.com.ossb.util.Security;
 
 
 public class Login extends ActionBarActivity  implements View.OnClickListener {
@@ -18,6 +21,10 @@ public class Login extends ActionBarActivity  implements View.OnClickListener {
     EditText etUsername, etPassword;
     TextView tvRegisterLink;
     UserLocalStore userLocalStore;
+    Security sec;
+    public static final String STRING_KEY = "1234567891234567";
+    private static final String LOG_TAG_DEBUG = "SERVER REQUEST";
+    private static final String LOG_TAG_RESULT = "SERVER REQUEST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +45,17 @@ public class Login extends ActionBarActivity  implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btLogin:
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
+                sec = new Security();
+                //
+                String username = sec.encrypt(etUsername.getText().toString(), STRING_KEY);
+                String password = sec.encrypt(etPassword.getText().toString(), STRING_KEY);
                 //
                 User user = new User(username, password);
 
                 authenticate(user);
 
-                userLocalStore.storeUserData(user);
-                userLocalStore.setUserLoggedIn(true);
+               // userLocalStore.storeUserData(user);
+               // userLocalStore.setUserLoggedIn(true);
 
                 break;
             case R.id.tvRegisterLink:
@@ -64,6 +73,7 @@ public class Login extends ActionBarActivity  implements View.OnClickListener {
                   showErrorMessage();
               }else{
                   logUserIn(retornedUser);
+                  showMessage();
               }
           }
 
@@ -72,12 +82,21 @@ public class Login extends ActionBarActivity  implements View.OnClickListener {
 
     private void showErrorMessage(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
-        dialogBuilder.setMessage("Incorrect User Details..");
+        dialogBuilder.setMessage("Incorrect User Details......:(");
+        dialogBuilder.setPositiveButton("ok", null);
+        dialogBuilder.show();
+    }
+
+
+    private void showMessage(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
+        dialogBuilder.setMessage("User Loged Sucessfuly......:)");
         dialogBuilder.setPositiveButton("ok", null);
         dialogBuilder.show();
     }
 
     private void logUserIn(User returnedUser){
+        Log.i(LOG_TAG_RESULT, "Name....:" + returnedUser.getName() + "Username....: " + returnedUser.getUsername() + "Password....: " + returnedUser.getPassword());
         userLocalStore.storeUserData(returnedUser);
         userLocalStore.setUserLoggedIn(true);
 
