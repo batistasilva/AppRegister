@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.android.gms.common.server.converter.StringToIntConverter;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -13,6 +15,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import org.apache.commons.codec.binary.Base64;
 
 import br.com.ossb.util.Security;
 
@@ -62,8 +65,11 @@ public class ServerRequests {
                 String data = URLEncoder.encode("name", "UTF-8")
                         + "=" + URLEncoder.encode(user.getName(), "UTF-8");
 
+                data += "&" + URLEncoder.encode("email", "UTF-8")
+                        + "=" + URLEncoder.encode(user.getEmail(), "UTF-8");
+
                 data += "&" + URLEncoder.encode("age", "UTF-8")
-                        + "=" + user.age +"";
+                        + "=" + user.getAge() +"";
 
                 data += "&" + URLEncoder.encode("username", "UTF-8")
                         + "=" + URLEncoder.encode(user.getUsername(), "UTF-8");
@@ -175,18 +181,18 @@ public class ServerRequests {
                 }else{
                     sec = new Security();
                     //
-                    String vname     = jsonObject.getString("name");
-                    String vemail    = jsonObject.getString("email");
-                    int    vage      = jsonObject.getInt("age");
-                    String vusername = jsonObject.getString("username");
-                    String vpassword = jsonObject.getString("password");
+                    String vname     = jsonObject.getString("param1");
+                    String vemail    = jsonObject.getString("param2");
+                    String vage      = jsonObject.getString("param3");
+                    String vusername = jsonObject.getString("param4");
+                    String vpassword = jsonObject.getString("param5");
 
-                    //Log.i(LOG_TAG_RESULT, "Name....:" + vname + "Username....: " + vusername + "Password....: " + vpassword);
+                    Log.i(LOG_TAG_RESULT, "Name....:" + vname + "Email....:" + vemail + "Username....: " + vusername + "Password....: " + vpassword);
                     //
-                    String name =vname;
-                    String email = vemail;
-                    int    age  = vage;
-                    String username = vusername;
+                    String name = sec.decrypt(vname, STRING_KEY);
+                    String email = sec.decrypt(vemail, STRING_KEY);
+                    String age  = sec.decrypt(vage, STRING_KEY);
+                    String username = sec.decrypt(vusername, STRING_KEY);
                     String password = vpassword;
 
                     //

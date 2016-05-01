@@ -24,7 +24,7 @@ public class Security {
             SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skey);
-            output = cipher.doFinal(Base64.decodeBase64(input));
+            output = cipher.doFinal(Base64.decodeBase64(input.getBytes()));
         }catch(Exception e){
             System.out.println(e.toString());
         }

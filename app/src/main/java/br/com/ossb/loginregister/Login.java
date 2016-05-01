@@ -96,7 +96,7 @@ public class Login extends ActionBarActivity  implements View.OnClickListener {
     }
 
     private void logUserIn(User returnedUser){
-        Log.i(LOG_TAG_RESULT, "Name....:" + returnedUser.getName() + "Username....: " + returnedUser.getUsername() + "Password....: " + returnedUser.getPassword());
+        Log.i(LOG_TAG_RESULT, "Name....:" + returnedUser.getName() + "Email....:" + returnedUser.getEmail() + "Username....: " + returnedUser.getUsername() + "Password....: " + returnedUser.getPassword());
         userLocalStore.storeUserData(returnedUser);
         userLocalStore.setUserLoggedIn(true);
 

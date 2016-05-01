@@ -5,11 +5,11 @@ package br.com.ossb.loginregister;
  */
 public class User {
     private String name, email, username, password;
-    int age;
+    private String age;
 
     public User(){};
 
-    public User(String name, String email, int age, String username, String password) {
+    public User(String name, String email, String age, String username, String password) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -22,7 +22,7 @@ public class User {
         this.password = password;
         this.name = "";
         this.email = "";
-        this.age = -1;
+        this.age = "";
     }
 
     public String getEmail() {
@@ -49,11 +49,11 @@ public class User {
         this.password = password;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

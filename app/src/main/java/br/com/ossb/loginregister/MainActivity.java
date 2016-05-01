@@ -14,7 +14,7 @@ import android.widget.EditText;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     Button btLogout;
-    EditText etName, etUsername, etAge;
+    EditText etName, etEmail, etUsername, etAge;
     UserLocalStore userLocalStore;
 
     @Override
@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         etName = (EditText) findViewById(R.id.etName);
+        etEmail   = (EditText) findViewById(R.id.etEmail);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etAge = (EditText) findViewById(R.id.etAge);
         btLogout = (Button) findViewById(R.id.btLogout);
@@ -49,8 +50,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
       // if(!user.equals(null)) {
            if(!user.getName().isEmpty()) {
                etName.setText(user.getName());
+               etEmail.setText(user.getEmail());
                etUsername.setText(user.getUsername());
-               etAge.setText(Integer.toString(user.getAge()));
+               etAge.setText(user.getAge());
            }
        //}else{
        //    clearUserLocalStore();

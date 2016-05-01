@@ -15,7 +15,7 @@ import br.com.ossb.util.Security;
 public class Register extends ActionBarActivity implements View.OnClickListener{
     Security sec;
     Button btRegister;
-    EditText etName, etUsername, etAge, etPassword;
+    EditText etName, etEmail, etUsername, etAge, etPassword;
     public static final String STRING_KEY = "1234567891234567";
 
     @Override
@@ -24,6 +24,7 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
         setContentView(R.layout.activity_register);
 
         etName    = (EditText) findViewById(R.id.etName);
+        etEmail   = (EditText) findViewById(R.id.etEmail);
         etUsername= (EditText) findViewById(R.id.etUsername);
         etAge     = (EditText) findViewById(R.id.etAge);
         etPassword= (EditText) findViewById(R.id.etPassword);
@@ -40,12 +41,12 @@ public class Register extends ActionBarActivity implements View.OnClickListener{
                 sec = new Security();
                 //
                 String name = sec.encrypt(etName.getText().toString(), STRING_KEY);
-                //String email = sec.encrypt(etName.getText().toString(), STRING_KEY);
-                int    age  = Integer.parseInt(etAge.getText().toString());
+                String email = sec.encrypt(etEmail.getText().toString(), STRING_KEY);
+                String age  = etAge.getText().toString();
                 String username = sec.encrypt(etUsername.getText().toString(), STRING_KEY);
                 String password = sec.encrypt(etPassword.getText().toString(), STRING_KEY);
 
-                User user = new User(name, "", age, username, password);
+                User user = new User(name, email, age, username, password);
 
                 registerUser(user);
 

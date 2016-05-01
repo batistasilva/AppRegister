@@ -19,7 +19,7 @@ public class UserLocalStore {
         //
         spEditor.putString("name", user.getName());
         spEditor.putString("email", user.getEmail());
-        spEditor.putInt("age", user.getAge());
+        spEditor.putString("age", user.getAge());
         spEditor.putString("username", user.getUsername());
         spEditor.putString("password", user.getPassword());
         //
@@ -29,7 +29,7 @@ public class UserLocalStore {
     public User getLoggedInUser(){
         String name = userLocalDatabase.getString("name", "");
         String email = userLocalDatabase.getString("email", "");
-        int    age  = userLocalDatabase.getInt("age", -1);
+        String age  = userLocalDatabase.getString("age", "");
         String username = userLocalDatabase.getString("username", "");
         String password = userLocalDatabase.getString("password", "");
 
